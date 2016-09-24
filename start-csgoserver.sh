@@ -26,9 +26,9 @@ test -z "${MAXPLAYERS+x}" && MAXPLAYERS="10"
 
 
 test -n "${MAXPLAYERS}" && MAXPLAYERS_CMD="-maxplayers_override ${MAXPLAYERS}"
-test -n "${AUTH_KEY}" && AUTH_KEY_CMD="-authkey ${AUTH_KEY}"
+test -n "${WEB_API_KEY}" && WEB_API_KEY_CMD="-authkey ${WEB_API_KEY}"
 test -n "${MAP}" && MAP_CMD="+map ${MAP}"
-test -n "${STEAM_ACCOUNT}" && STEAM_ACCOUNT_CMD="+sv_setsteamaccount ${STEAM_ACCOUNT}"
+test -n "${GSLT}" && GSLT_CMD="+sv_setsteamaccount ${GSLT}"
 
 if [ "$GAME_MODE" == "CASUAL" ]; then
     GAME_MODE_CMD="+game_type 0 +game_mode 0"
@@ -43,4 +43,4 @@ fi
 echo "#######################################################"
 echo "Starting up CS:GO Server..."
 
-./data/srcds_run -game csgo -usercon -nobots -tickrate 128 -ip 0.0.0.0 ${MAXPLAYERS_CMD} ${AUTH_KEY_CMD} ${MAP_CMD} ${STEAM_ACCOUNT_CMD} ${GAME_MODE_CMD}
+./data/srcds_run -game csgo -usercon -nobots -tickrate 128 -ip 0.0.0.0 ${MAXPLAYERS_CMD} ${WEB_API_KEY_CMD} ${MAP_CMD} ${GSLT_CMD} ${GAME_MODE_CMD}
