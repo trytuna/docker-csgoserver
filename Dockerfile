@@ -11,6 +11,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
 RUN useradd -ms /bin/bash csgo
 USER csgo
 WORKDIR /home/csgo
+RUN mkdir -p /home/csgo/data
 RUN curl -sqL https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar zxvf -
 COPY ./start-csgoserver.sh /usr/local/bin/start-csgoserver.sh
 
