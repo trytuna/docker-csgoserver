@@ -17,8 +17,16 @@ COPY ./start-csgoserver.sh /usr/local/bin/start-csgoserver.sh
 USER root
 RUN chmod +x /usr/local/bin/start-csgoserver.sh
 
-EXPOSE 27015/udp
+# game transmission, pings and RCON
 EXPOSE 27015/tcp
+EXPOSE 27015/udp
+
+# SourceTV transmission
+EXPOSE 27020/udp
+
+# unkown
+EXPOSE 27005/udp
+
 
 USER csgo
 CMD /usr/local/bin/start-csgoserver.sh
