@@ -12,6 +12,7 @@ RUN useradd -ms /bin/bash csgo
 USER csgo
 WORKDIR /home/csgo
 RUN curl -sqL https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar zxvf -
+RUN mkdir ~/.steam && ln -s /home/csgo/linux32 /home/csgo/.steam/sdk32
 COPY ./start-csgoserver.sh /usr/local/bin/start-csgoserver.sh
 
 USER root
@@ -29,4 +30,4 @@ EXPOSE 27005/udp
 
 
 USER csgo
-CMD /usr/local/bin/start-csgoserver.sh
+ENTRYPOINT ["/bin/bash", "-c", "/usr/local/bin/start-csgoserver.sh ${@}", "--"]

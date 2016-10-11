@@ -43,7 +43,3 @@ Like setting the GSLT just add another environment variable for the Web API Key.
 Make sure that the owner of /home/csgo/server1 is csgo (uid=1000, gid=1000) if you want to mount a volume into the container.
 
     chown 1000:1000 /home/csgo/server1
-
-### TODO
-
-* GOTV enable
