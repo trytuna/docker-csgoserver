@@ -51,9 +51,23 @@ if [ "$SOURCEMOD" = true ]; then
         curl -sqL http://mirror.pointysoftware.net/alliedmodders/mmsource-1.10.6-linux.tar.gz | tar zxvf -
 
         # Installing sourcemods
-        curl -sqL https://www.sourcemod.net/smdrop/1.8/sourcemod-1.8.0-git5930-linux.tar.gz | tar zxvf -
+        # e.g. -e SOURCEMOD_VERSION="1.9.0" -e SOURCEMOD_BUILD="5984" (latest dev build)
+        if [ -n "$SOURCEMOD_VERSION" ] && [ -n "$SOURCEMOD_BUILD" ]; then
+            MAJOR=$(echo $SOURCEMOD_VERSION | awk -F '.' '{ print $1 }')
+            MINOR=$(echo $SOURCEMOD_VERSION | awk -F '.' '{ print $2 }')
+            curl -sqL https://www.sourcemod.net/smdrop/${MAJOR}.${MINOR}/sourcemod-${SOURCEMOD_VERSION}-git${SOURCEMOD_BUILD}-linux.tar.gz | tar zxvf -
+        else
+            curl -sqL https://www.sourcemod.net/smdrop/1.8/sourcemod-1.8.0-git5930-linux.tar.gz | tar zxvf -
+        fi
     else
-        echo "INFO: metamod:source seems to be already installed. Skipping installation process..."
+        echo "INFO: metamod:source and sourcemod seems to be already installed. Skipping installation process..."
+    fi
+else
+    if [ -d "${CSGO_DATA}/csgo/addons" ]; then
+        echo "INFO: SOURCEMOD is disabled"
+        echo "INFO: backing up addons folder..."
+        mv "${CSGO_DATA}/csgo/addons" "${CSGO_DATA}/csgo/addons_backup"
+        echo "INFO: addons backup folder is '${CSGO_DATA}/csgo/addons_backup'. If you want to enable sourcemod again with your addons just set the environment variable 'SOURCEMOD=true' and rename 'addons_backup' back to 'addons'"
     fi
 fi
 
@@ -64,6 +78,5 @@ echo "Starting up CS:GO Server..."
 # -ip 0.0.0.0 is set so that it doesn't show the container ip instead.
 # It is not possible to bind srcds_run to the actual (external) ip
 cd ${CSGO_HOME}
-echo "Number of args: ${#}"
 echo "Start command: ./data/srcds_run -game csgo -usercon -nobots -tickrate 128 -ip 0.0.0.0 ${MAXPLAYERS_CMD} ${WEB_API_KEY_CMD} ${MAP_CMD} ${GSLT_CMD} ${GAME_MODE_CMD} $@"
 ./data/srcds_run -game csgo -usercon -nobots -tickrate 128 -ip 0.0.0.0 ${MAXPLAYERS_CMD} ${WEB_API_KEY_CMD} ${MAP_CMD} ${GSLT_CMD} ${GAME_MODE_CMD} $@
