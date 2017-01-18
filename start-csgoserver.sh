@@ -57,7 +57,7 @@ if [ "$SOURCEMOD" = true ]; then
             MINOR=$(echo $SOURCEMOD_VERSION | awk -F '.' '{ print $2 }')
             curl -sqL https://www.sourcemod.net/smdrop/${MAJOR}.${MINOR}/sourcemod-${SOURCEMOD_VERSION}-git${SOURCEMOD_BUILD}-linux.tar.gz | tar zxvf -
         else
-            curl -sqL https://www.sourcemod.net/smdrop/1.8/sourcemod-1.8.0-git5930-linux.tar.gz | tar zxvf -
+            curl -sqL https://www.sourcemod.net/smdrop/1.8/sourcemod-1.8.0-git5967-linux.tar.gz | tar zxvf -
         fi
     else
         echo "INFO: metamod:source and sourcemod seems to be already installed. Skipping installation process..."
