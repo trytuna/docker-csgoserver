@@ -8,14 +8,6 @@ A simple Counter Strike: Global Offensive server without any voodoo
 
     docker pull methanol/docker-csgoserver:latest
 
-#### Enable metamod and sourcemod
-
-To enable metamod and sourcemod you habe to add `SOURCEMOD=true` to the environment
-
-    docker run -e SOURCEMOD=true ... methanol/docker-csgoserver
-
-After enabling sourcemod you should have two new folders - `/home/csgo/data/csgo/adddons` and  `/home/csgo/data/csgo/cfg`.
-
 #### Set GSLT (Game Server Login Token)
 
 Without specifying a GSLT the server will be restricted to LAN connections only. Go to https://steamcommunity.com/dev/managegameservers and create a GSLT.
