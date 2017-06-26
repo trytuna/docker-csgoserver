@@ -8,14 +8,6 @@ A simple Counter Strike: Global Offensive server without any voodoo
 
     docker pull methanol/docker-csgoserver:latest
 
-#### Enable metamod and sourcemod
-
-To enable metamod and sourcemod you habe to add `SOURCEMOD=true` to the environment
-
-    docker run -e SOURCEMOD=true ... methanol/docker-csgoserver
-
-After enabling sourcemod you should have two new folders - `/home/csgo/data/csgo/adddons` and  `/home/csgo/data/csgo/cfg`.
-
 #### Set GSLT (Game Server Login Token)
 
 Without specifying a GSLT the server will be restricted to LAN connections only. Go to https://steamcommunity.com/dev/managegameservers and create a GSLT.
@@ -38,8 +30,15 @@ Like setting the GSLT just add another environment variable for the Web API Key.
 
 #### Run server with more advanced settings
 
-    docker run -e GSLT="<your-gslt-here" -e WEB_API_KEY="<your-web-api-key-here>" -e MAP="de_cache" -e MAXPLAYERS="12" GAME_MODE="CASUAL" -p 27015:27015/tcp -p 27015:27015/udp -v /home/csgo/server1:/home/csgo/data -d --name="csgoserver" methanol/docker-csgoserver
+    docker run -e GSLT="<your-gslt-here" -e WEB_API_KEY="<your-web-api-key-here>" -e MAP="de_cache" -e MAXPLAYERS="12" GAME_MODE="CASUAL" -p 27015:27015/tcp -p 27015:27015/udp -v /opt/server1:/home/csgo/data -d --name="csgoserver" methanol/docker-csgoserver
 
-Make sure that the owner of /home/csgo/server1 is csgo (uid=1000, gid=1000) if you want to mount a volume into the container.
+##### Available game modes:
 
-    chown 1000:1000 /home/csgo/server1
+- `CASUAL`
+- `COMPETITIVE`
+- `ARMS_RACE`
+- `DEMOLITION`
+
+Make sure that the owner of /opt/server1 is csgo (uid=1000, gid=1000) if you want to mount a volume into the container.
+
+    chown 1000:1000 /opt/server1
