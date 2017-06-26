@@ -30,4 +30,4 @@ EXPOSE 27005/udp
 
 
 USER csgo
-ENTRYPOINT ["/bin/bash", "-c", "/usr/local/bin/start-csgoserver.sh ${@}", "--"]
+ENTRYPOINT ["/bin/bash", "-c", "/usr/local/bin/start-csgoserver.sh", "--"]

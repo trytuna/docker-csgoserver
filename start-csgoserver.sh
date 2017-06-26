@@ -22,7 +22,7 @@ while
     [ "$STEAMCMD_EXIT" -eq "8" ]
 do :;  done
 
-# default settings
+# setting defaults
 test -z "${MAP+x}" && MAP="de_dust2"
 test -z "${GAME_MODE+x}" && GAME_MODE="COMPETITIVE"
 test -z "${MAXPLAYERS+x}" && MAXPLAYERS="10"
@@ -48,5 +48,4 @@ echo "Starting up CS:GO Server..."
 # -ip 0.0.0.0 is set so that it doesn't show the container ip instead.
 # It is not possible to bind srcds_run to the actual (external) ip
 cd ${CSGO_HOME}
-echo "Start command: ./data/srcds_run -game csgo -usercon -nobots -tickrate 128 -ip 0.0.0.0 ${MAXPLAYERS_CMD} ${WEB_API_KEY_CMD} ${MAP_CMD} ${GSLT_CMD} ${GAME_MODE_CMD} $@"
 ./data/srcds_run -game csgo -usercon -nobots -tickrate 128 -ip 0.0.0.0 ${MAXPLAYERS_CMD} ${WEB_API_KEY_CMD} ${MAP_CMD} ${GSLT_CMD} ${GAME_MODE_CMD} $@
