@@ -26,6 +26,7 @@ do :;  done
 test -z "${MAP+x}" && MAP="de_dust2"
 test -z "${GAME_MODE+x}" && GAME_MODE="COMPETITIVE"
 test -z "${MAXPLAYERS+x}" && MAXPLAYERS="10"
+test -z "${SERVER_IP+x}" && SERVER_IP="0.0.0.0"
 
 test -n "${MAXPLAYERS}" && MAXPLAYERS_CMD="-maxplayers_override ${MAXPLAYERS}"
 test -n "${WEB_API_KEY}" && WEB_API_KEY_CMD="-authkey ${WEB_API_KEY}"
@@ -45,7 +46,5 @@ fi
 echo "#######################################################"
 echo "Starting up CS:GO Server..."
 
-# -ip 0.0.0.0 is set so that it doesn't show the container ip instead.
-# It is not possible to bind srcds_run to the actual (external) ip
 cd ${CSGO_HOME}
-./data/srcds_run -game csgo -usercon -nobots -tickrate 128 -ip 0.0.0.0 ${MAXPLAYERS_CMD} ${WEB_API_KEY_CMD} ${MAP_CMD} ${GSLT_CMD} ${GAME_MODE_CMD} $@
+./data/srcds_run -game csgo -usercon -tickrate 128 +ip ${SERVER_IP} +net_public_adr ${SERVER_IP} ${MAXPLAYERS_CMD} ${WEB_API_KEY_CMD} ${MAP_CMD} ${GSLT_CMD} ${GAME_MODE_CMD} $@
